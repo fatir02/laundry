@@ -16,11 +16,13 @@ app.use(session({
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '..', 'public')));
+// Set Views and Static directory (compatible with both local and Vercel serverless)
+const publicDir = path.join(process.cwd(), 'public');
+const viewsDir = path.join(process.cwd(), 'views');
 
-// Set View Engine
-app.set('views', path.join(__dirname, '..', 'views'));
+app.use(express.static(publicDir));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+app.set('views', [viewsDir, path.join(__dirname, '..', 'views')]);
 app.set('view engine', 'ejs');
 
 // Helpers for formatting
