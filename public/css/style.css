@@ -1,0 +1,46 @@
+/* SPRINT Laundry Custom CSS & Print Styles */
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Custom Print Optimization for Receipt */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  
+  nav, footer, form, .no-print, button, #toast, a[href^="https://wa.me"] {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #receipt-card {
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #receipt-card > div:first-child {
+    background: #f8fafc !important;
+    color: #000 !important;
+    border-bottom: 2px dashed #94a3b8 !important;
+  }
+
+  #receipt-card > div:first-child * {
+    color: #000 !important;
+  }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title + ' | ' : '' %><%= outlet.name %></title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef6ff',
+              100: '#d9eaff',
+              200: '#bcdbff',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+  <!-- Top Navigation Bar -->
+  <nav class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <!-- Logo & Branding -->
+        <a href="/track" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-soap text-lg"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-black text-xl tracking-tight bg-gradient-to-r from-blue-700 to-indigo-600 bg-clip-text text-transparent">KARTIKA</span>
+              <span class="font-bold text-slate-800 text-xl">Laundry</span>
+            </div>
+            <p class="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Padamara, Purbalingga</p>
+          </div>
+        </a>
+
+        <!-- Navigation Links -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="/track" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors <%= currentUrl.startsWith('/track') ? 'bg-blue-50 text-blue-700' : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100' %>">
+            <i class="fa-solid fa-magnifying-glass mr-1 text-xs"></i> Lacak Laundry
+          </a>
+
+          <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+            <!-- Admin Links (Only shown when logged in) -->
+            <a href="/admin/orders" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors <%= currentUrl === '/admin/orders' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100' %>">
+              <i class="fa-solid fa-gauge mr-1 text-xs"></i> Pesanan
+            </a>
+            <a href="/admin/reports" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors <%= currentUrl.startsWith('/admin/reports') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100' %>">
+              <i class="fa-solid fa-chart-line mr-1 text-xs"></i> Rekap Penjualan
+            </a>
+            <a href="/admin/logout" class="px-3 py-2 rounded-lg text-xs font-bold text-rose-600 hover:bg-rose-50 border border-rose-200 transition-colors flex items-center gap-1" title="Keluar Admin">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span class="hidden sm:inline">Logout</span>
+            </a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main class="flex-grow">

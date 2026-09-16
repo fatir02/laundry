@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+  DirectoryIndex index.php
+</IfModule>
