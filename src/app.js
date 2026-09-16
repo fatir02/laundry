@@ -16,6 +16,8 @@ app.use(session({
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Set Views and Static directory (compatible with both local and Vercel serverless)
 const publicDir = path.join(process.cwd(), 'public');
 const viewsDir = path.join(process.cwd(), 'views');
@@ -183,8 +185,9 @@ app.get('/admin/login', (req, res) => {
 
 // Admin Login Process
 app.post('/admin/login', (req, res) => {
-  const { username, password } = req.body;
-  if (username === 'admin' && password === 'admin123') {
+  const user = (req.body?.username || '').trim();
+  const pass = (req.body?.password || '').trim();
+  if (user.toLowerCase() === 'admin' && pass === 'admin123') {
     req.session.isAdmin = true;
     return res.redirect('/admin/orders');
   }
